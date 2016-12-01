@@ -60,11 +60,15 @@ function run(iterations, log){
 	for(var i = 0; i < iterations; i++){
 		step(log);
 	}
-	console.log('Final History', JSON.stringify(exec.history));
+	//console.log('Final History', JSON.stringify(exec.history));
 	return exec.history;
 }
 
 function estimate(n, final_state, iterations){
+	// n is the max number of steps
+	// final_state the desired state
+	// iterations the number of times
+		// to run the code to estimate
 	init();
 	var histories = [];
 	for(var i =0; i < iterations; i++){
@@ -77,8 +81,10 @@ function estimate(n, final_state, iterations){
 			count+=1;
 		}
 	}
-	console.log('Estimated:', count, count/iterations);
+	console.log(`Estimated for ${final_state} after ${n} steps:`, count/iterations);
 }
+estimate(100, 5, 10000);
+estimate(100, 9, 10000);
 
 function estimate_time(desired_state, iterations){
 	init();
@@ -97,6 +103,7 @@ function estimate_time(desired_state, iterations){
 	}
 	console.log(`Estimated time to enter ${desired_state}`, res/iterations);
 }
+estimate_time(3, 10000);
 
 function estimate_x_before_y(y,x, iterations){
 	var runs = [];
@@ -115,3 +122,4 @@ function estimate_x_before_y(y,x, iterations){
 	}
 	console.log(`Prob to enter ${x} before ${y} is`, entered_x/iterations);
 }
+estimate_x_before_y(3, 9, 10000);
